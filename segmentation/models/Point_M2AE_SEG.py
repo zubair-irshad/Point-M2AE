@@ -142,7 +142,8 @@ class Point_M2AE_SEG(nn.Module):
         for i in range(3):
             self.propagations.append(PointNetFeaturePropagation_(in_channel=self.encoder_dims[i] + 3, mlp=[self.trans_dim * 4, 1024]))
 
-        self.convs1 = nn.Conv1d(6208, 1024, 1)
+        # self.convs1 = nn.Conv1d(6208, 1024, 1)
+        self.convs1 = nn.Conv1d(6144, 1024, 1)
         self.dp1 = nn.Dropout(0.5)
         self.convs2 = nn.Conv1d(1024, 512, 1)
         self.convs3 = nn.Conv1d(512, 256, 1)
@@ -207,9 +208,11 @@ class Point_M2AE_SEG(nn.Module):
         x_avg = torch.mean(x, 2)
         x_max_feature = x_max.view(B, -1).unsqueeze(-1).repeat(1, 1, N)
         x_avg_feature = x_avg.view(B, -1).unsqueeze(-1).repeat(1, 1, N)
-        cls_label_one_hot = cls_label.view(B, 16, 1)
-        cls_label_feature = self.label_conv(cls_label_one_hot).repeat(1, 1, N)
-        x_global_feature = torch.cat((x_max_feature + x_avg_feature, cls_label_feature), 1) # 672 * 2 + 64
+        # cls_label_one_hot = cls_label.view(B, 16, 1)
+        # cls_label_feature = self.label_conv(cls_label_one_hot).repeat(1, 1, N)
+        # x_global_feature = torch.cat((x_max_feature + x_avg_feature, cls_label_feature), 1) # 672 * 2 + 64
+
+        x_global_feature = torch.cat((x_max_feature + x_avg_feature), 1) # 672 * 2 + 64
 
         x = torch.cat((x_global_feature, x), 1)
         x = self.relu(self.bns1(self.convs1(x)))
