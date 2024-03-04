@@ -8,8 +8,8 @@ from utils.logger import *
 from utils.config import *
 import time
 import os
-import torch
-from tensorboardX import SummaryWriter
+# import torch
+# from tensorboardX import SummaryWriter
 
 
 
@@ -34,13 +34,13 @@ def main():
     log_file = os.path.join(args.experiment_path, f'{timestamp}.log')
     logger = get_root_logger(log_file=log_file, name=args.log_name)
     # define the tensorboard writer
-    if not args.test:
-        if args.local_rank == 0:
-            train_writer = SummaryWriter(os.path.join(args.tfboard_path, 'train'))
-            val_writer = SummaryWriter(os.path.join(args.tfboard_path, 'test'))
-        else:
-            train_writer = None
-            val_writer = None
+    # if not args.test:
+    #     if args.local_rank == 0:
+    #         train_writer = SummaryWriter(os.path.join(args.tfboard_path, 'train'))
+    #         val_writer = SummaryWriter(os.path.join(args.tfboard_path, 'test'))
+    #     else:
+    train_writer = None
+    val_writer = None
     # config
     config = get_config(args, logger = logger)
     # batch size
