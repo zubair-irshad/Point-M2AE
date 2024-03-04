@@ -212,7 +212,7 @@ class Point_M2AE_SEG(nn.Module):
         # cls_label_feature = self.label_conv(cls_label_one_hot).repeat(1, 1, N)
         # x_global_feature = torch.cat((x_max_feature + x_avg_feature, cls_label_feature), 1) # 672 * 2 + 64
 
-        x_global_feature = torch.cat((x_max_feature + x_avg_feature), 1) # 672 * 2 + 64
+        x_global_feature = torch.cat((x_max_feature, x_avg_feature), 1) # 672 * 2 + 64
 
         x = torch.cat((x_global_feature, x), 1)
         x = self.relu(self.bns1(self.convs1(x)))
