@@ -116,8 +116,14 @@ class Point_M2AE_SEG(nn.Module):
     def __init__(self, cls_dim):
         super().__init__()
         self.trans_dim = 384
-        self.group_sizes = [16, 8, 8]
-        self.num_groups = [512, 256, 64]
+        # self.group_sizes = [16, 8, 8]
+        # self.num_groups = [512, 256, 64]
+
+        self.group_sizes = [128, 64, 32]
+        self.num_groups = [750, 375, 94]
+        # self.group_size = 128
+        # self.num_group = 750
+
         self.cls_dim = cls_dim
         self.encoder_dims = [96, 192, 384]
 
