@@ -581,7 +581,8 @@ def test(args):
     shutil.copy('models/%s.py' % args.model, str(exp_dir))
     # shutil.copy('models/pointnet2_utils.py', str(exp_dir))
 
-    classifier = MODEL.get_model(num_part).cuda()
+    # classifier = MODEL.get_model(num_part).cuda()
+    classifier = MODEL.Point_M2AE_SEG(num_part).cuda()
     classifier.apply(inplace_relu)
     print('# generator parameters:', sum(param.numel() for param in classifier.parameters()))
 
