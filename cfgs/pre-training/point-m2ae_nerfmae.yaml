@@ -30,10 +30,8 @@ model: {
   NAME: Point_M2AE,
   mask_ratio: 0.8,
   # tokenizers
-  # group_sizes: [16, 8, 8], 
-  # num_groups: [512, 256, 64],
-  group_sizes : [128, 64, 32],
-  num_groups : [750, 375, 94],
+  group_sizes: [128, 64, 32],
+  num_groups: [750, 375, 94],
   # hierarchical encoder
   encoder_depths: [5, 5, 5],
   encoder_dims: [96, 192, 384],
