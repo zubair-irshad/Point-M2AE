@@ -182,7 +182,7 @@ class Point_M2AE_SEG(nn.Module):
             if m.bias is not None:
                 nn.init.constant_(m.bias, 0)
 
-    def forward(self, pts, cls_label):
+    def forward(self, pts):
         B, C, N = pts.shape
         pts = pts.transpose(-1, -2).contiguous() # B N 3
         # divide the point cloud in the same form. This is important
